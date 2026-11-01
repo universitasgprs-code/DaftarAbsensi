@@ -766,6 +766,21 @@
 
     <div class="section-title">📊 Integrasi Google Spreadsheet</div>
     <div class="form-group">
+      <label>Nama Akun Google</label>
+      <input type="text" id="setGoogleAccountName" placeholder="Contoh: akun@gmail.com">
+    </div>
+    <div class="form-group">
+      <label>Nama Folder Spreadsheet</label>
+      <input type="text" id="setGoogleFolderName" placeholder="Contoh: Data Absensi">
+    </div>
+    <div class="form-group">
+      <label>Link Folder Google Drive</label>
+      <div style="display:flex; gap:6px;">
+        <input type="text" id="setGoogleDriveLink" placeholder="https://drive.google.com/drive/folders/..." style="flex:1;">
+        <button type="button" class="btn-blue" onclick="openGoogleDriveFolder()">📂 Buka Folder</button>
+      </div>
+    </div>
+    <div class="form-group">
       <label>URL Google Apps Script Web App</label>
       <div style="display:flex; gap:6px;">
         <input type="text" id="setGoogleScriptUrl" placeholder="https://script.google.com/macros/s/.../exec" style="flex:1;">
@@ -3527,6 +3542,15 @@ async function testGoogleSheets() {
   } catch (err) {
     toast('❌ Gagal tes spreadsheet: ' + err.message, 'error');
   }
+}
+
+function openGoogleDriveFolder() {
+  const link = document.getElementById('setGoogleDriveLink').value.trim() || state.googleDriveLink;
+  if (!link) {
+    toast('⚠️ Masukkan Link Folder Google Drive terlebih dahulu!', 'error');
+    return;
+  }
+  window.open(link, '_blank');
 }
 
 /* ===== EXCEL ===== */
